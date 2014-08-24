@@ -25,7 +25,7 @@ namespace ImageTagging
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
+             
             MainForm view = new MainForm();
             view.Visible = false;
             TagController controller = new TagController(view);
