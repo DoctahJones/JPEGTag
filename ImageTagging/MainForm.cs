@@ -191,7 +191,7 @@ namespace ImageTagging
             //TODO if we close after adding tag to image we need to save that, currently only saves when switching image.
             try
             {
-                this.controller.saveTagDataToFile();
+                this.controller.saveChangesOnClose();
             }
             finally
             {

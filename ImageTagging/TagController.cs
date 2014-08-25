@@ -160,23 +160,29 @@ namespace ImageTagging
             }
         }
 
+        public void saveChangesOnClose()
+        {
+            this.currentImage.saveChangesToNewFile();
+            this.saveTagDataToFile();
+        }
+
 
         public void saveTagDataToFile()
         {
             if (this.tagUsageData.getChangesMade())
             {
                 //TODO anime and stuff check file write is successful and tagdata exists need to read fromf ile or create at program launch.
-                string file = System.IO.Path.GetDirectoryName(new Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath) + "\\Data\\";
+                string file = getProgDir() + "\\Data\\";
                 Directory.CreateDirectory(file);
                 FileStream fs = new FileStream(file + "tagdata.json", FileMode.OpenOrCreate);
-                this.tagUsageData.toJSON().WriteTo(fs);
+                this.tagUsageData.writeToFileStream(fs);
             }
         }
 
         public void readTagDataFromFile()
         {
             //todo sort this mess out, if we get an error we want to inform user and create a blank tagdata, if no file founf we want blank data
-            string fileDir = System.IO.Path.GetDirectoryName(new Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath) + "\\Data\\";
+            string fileDir = getProgDir() + "\\Data\\";
             Directory.CreateDirectory(fileDir);
             MemoryStream stream1 = new MemoryStream();
             if (File.Exists(fileDir + "tagdata.json"))
@@ -201,6 +207,11 @@ namespace ImageTagging
             IEnumerable<string> files = Directory.GetFiles(folderPath, "*.*").Where(s => s.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase)
                 || s.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase));
             return files.ToList();
+        }
+
+        private string getProgDir()
+        {
+            return System.IO.Path.GetDirectoryName(new Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath);
         }
 
     }

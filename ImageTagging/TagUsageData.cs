@@ -36,9 +36,9 @@ namespace ImageTagging
         }
 
         /// <summary>
-        /// Method to update the tag usage data when a tag has been added to an image.
+        /// Method to update the tag usage data when a tag has been used so we have records of how many times and how recently it was used.
         /// </summary>
-        /// <param name="tag"></param>
+        /// <param name="tag">The Tag Added to an Image.</param>
         public void newTagUsed(string tag)
         {
             if (this.mostUsed.Contains(tag))
@@ -64,6 +64,11 @@ namespace ImageTagging
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(TagUsageData));
             ser.WriteObject(stream, this);
             return stream;
+        }
+
+        public void writeToFileStream(FileStream fileStream)
+        {
+            this.toJSON().WriteTo(fileStream);
         }
 
         public Hashtable getMostUsed()
