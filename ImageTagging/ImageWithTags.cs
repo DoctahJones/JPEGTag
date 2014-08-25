@@ -36,7 +36,7 @@ namespace ImageTagging
                 {
                     Console.WriteLine("The file you passed in is not a JPEG.");
                     //return;
-                    //TODO throw exception or some such
+                    //TODO throw exception or skip image or some such
                 }
                 /*
                  * If the image frame exists and it already has stored metadata tags
@@ -94,7 +94,7 @@ namespace ImageTagging
             if (this.hasChanged != 0)
             {
                 //should maybe still check if this file exists.
-                string outputPath = Path.GetDirectoryName(this.filePath) + @"\" + Path.GetFileNameWithoutExtension(this.filePath) + "temp1257691.jpg";
+                string outputPath = Path.Combine(Path.GetDirectoryName(this.filePath), Guid.NewGuid().ToString());
                 BitmapCreateOptions createOptions = BitmapCreateOptions.PreservePixelFormat | BitmapCreateOptions.IgnoreColorProfile;
                 uint paddingAmount = calcPaddingAmount();
                 //try
@@ -110,7 +110,7 @@ namespace ImageTagging
                     }
                     //The jpeg that will be saved with the changes.
                     JpegBitmapEncoder output = new JpegBitmapEncoder();
-                    
+
                     if (original.Frames[0] != null)
                     {
                         //TODO what if the image has no metadata.
@@ -125,7 +125,7 @@ namespace ImageTagging
                         metadata.Keywords = new System.Collections.ObjectModel.ReadOnlyCollection<string>(this.tags);
                         output.Frames.Add(BitmapFrame.Create(original.Frames[0], original.Frames[0].Thumbnail, metadata, original.Frames[0].ColorContexts));
                     }
-                    
+
                     using (Stream outputFile = File.Open(outputPath, FileMode.Create, FileAccess.ReadWrite))
                     {
                         output.Save(outputFile);

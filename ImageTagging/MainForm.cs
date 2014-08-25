@@ -11,7 +11,9 @@ namespace ImageTagging
 {
     public partial class MainForm : Form, ITagView
     {
-
+        /// <summary>
+        /// The controller which this form interacts with.
+        /// </summary>
         private TagController controller;
 
         public MainForm()
@@ -168,7 +170,6 @@ namespace ImageTagging
 
         void control_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-
             if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right)
             {
                 e.IsInputKey = true;
@@ -188,7 +189,6 @@ namespace ImageTagging
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            //TODO if we close after adding tag to image we need to save that, currently only saves when switching image.
             try
             {
                 this.controller.saveChangesOnClose();

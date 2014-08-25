@@ -15,20 +15,28 @@ namespace ImageTagging
         private Hashtable mostUsed;
         [DataMember]
         private Queue mostRecent;
-        //Whether any changes have been made so we can save writing file if nothing has changed.
+        /// <summary>
+        /// Whether any changes have been made so we can save writing file if nothing has changed.
+        /// </summary>
         private bool changesMade = false;
 
-
+        /// <summary>
+        /// Default Constructor initialises both data members as empty lists.
+        /// </summary>
         public TagUsageData()
         {
             mostUsed = new Hashtable();
             mostRecent = new Queue();
         }
 
+        /// <summary>
+        /// Method to read a TageUsageData object from a JSON memorystream and set the data structures of this object to those from the stream.
+        /// </summary>
+        /// <param name="stream">The MemoryStream containing the JSON serialization of an object.</param>
         public void readDataFromMemoryStream(MemoryStream stream)
         {
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(TagUsageData));
-            //set position to start of stream or it will read from end and error.
+            //set position to start of stream in case it isn't already.
             stream.Position = 0;
             TagUsageData streamData = (TagUsageData)ser.ReadObject(stream);
             this.mostUsed = streamData.getMostUsed();
@@ -57,7 +65,10 @@ namespace ImageTagging
             this.mostRecent.Enqueue(tag);
             this.changesMade = true;
         }
-
+        /// <summary>
+        /// Method to write the data contract of this object to a MemoryStream in JSON format.
+        /// </summary>
+        /// <returns>MemoryStream containing the object in JSON format.</returns>
         public MemoryStream toJSON()
         {
             MemoryStream stream = new MemoryStream();
