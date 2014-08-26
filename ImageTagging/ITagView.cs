@@ -12,6 +12,7 @@ namespace ImageTagging
         void setController(TagController controller);
         void displayImage(Image img);
         void populateExistingTags(List<string> tags);
+        void populatePrevTagsPanel(List<string> tags);
 
     }
 }

@@ -65,7 +65,6 @@ namespace ImageTagging
 
         public void populateExistingTags(List<string> tags)
         {
-
             StringBuilder s = new StringBuilder();
             lblExistingTags.Links.Clear();
             int count = 0;
@@ -82,6 +81,11 @@ namespace ImageTagging
                 }
             }
             lblExistingTags.Text = s.ToString();
+        }
+
+        public void populatePrevTagsPanel(List<string> tags)
+        {
+            this.pnlPrevTags.
         }
 
 
@@ -195,7 +199,8 @@ namespace ImageTagging
             }
             finally
             {
-                base.OnFormClosing(e);
+                this.Dispose();
+                //base.OnFormClosing(e);
             }
         }
     }

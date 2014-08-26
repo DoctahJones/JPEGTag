@@ -64,6 +64,7 @@
             this.lineShape2 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.dlgOpenFolder = new System.Windows.Forms.FolderBrowserDialog();
             this.statusBar = new System.Windows.Forms.StatusStrip();
+            this.lblTagsHeader = new System.Windows.Forms.Label();
             this.pnlPrevTags = new ImageTagging.ResizableButtonPanel();
             this.btnAnime = new System.Windows.Forms.Button();
             this.mnuMain.SuspendLayout();
@@ -190,7 +191,7 @@
             this.txtTagEntry.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTagEntry.Location = new System.Drawing.Point(19, 287);
             this.txtTagEntry.Name = "txtTagEntry";
-            this.txtTagEntry.Size = new System.Drawing.Size(130, 26);
+            this.txtTagEntry.Size = new System.Drawing.Size(129, 26);
             this.txtTagEntry.TabIndex = 0;
             // 
             // shapeContainer1
@@ -290,6 +291,7 @@
             // splitAll.Panel2
             // 
             this.splitAll.Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.splitAll.Panel2.Controls.Add(this.lblTagsHeader);
             this.splitAll.Panel2.Controls.Add(this.btnAddTag);
             this.splitAll.Panel2.Controls.Add(this.label1);
             this.splitAll.Panel2.Controls.Add(this.pnlPrevTags);
@@ -345,7 +347,7 @@
             // btnNextImage
             // 
             this.btnNextImage.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnNextImage.Location = new System.Drawing.Point(172, 14);
+            this.btnNextImage.Location = new System.Drawing.Point(164, 14);
             this.btnNextImage.Name = "btnNextImage";
             this.btnNextImage.Size = new System.Drawing.Size(111, 23);
             this.btnNextImage.TabIndex = 9;
@@ -357,7 +359,7 @@
             // btnPrevImage
             // 
             this.btnPrevImage.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnPrevImage.Location = new System.Drawing.Point(58, 14);
+            this.btnPrevImage.Location = new System.Drawing.Point(50, 14);
             this.btnPrevImage.Name = "btnPrevImage";
             this.btnPrevImage.Size = new System.Drawing.Size(111, 23);
             this.btnPrevImage.TabIndex = 8;
@@ -382,7 +384,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblExistingTags.Location = new System.Drawing.Point(32, 68);
             this.lblExistingTags.Name = "lblExistingTags";
-            this.lblExistingTags.Size = new System.Drawing.Size(280, 68);
+            this.lblExistingTags.Size = new System.Drawing.Size(263, 68);
             this.lblExistingTags.TabIndex = 6;
             this.lblExistingTags.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblExistingTags_LinkClicked);
             // 
@@ -390,7 +392,7 @@
             // 
             this.btnAddTag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddTag.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddTag.Location = new System.Drawing.Point(155, 287);
+            this.btnAddTag.Location = new System.Drawing.Point(154, 287);
             this.btnAddTag.Name = "btnAddTag";
             this.btnAddTag.Size = new System.Drawing.Size(73, 31);
             this.btnAddTag.TabIndex = 7;
@@ -437,21 +439,34 @@
             this.statusBar.Size = new System.Drawing.Size(627, 22);
             this.statusBar.TabIndex = 10;
             // 
+            // lblTagsHeader
+            // 
+            this.lblTagsHeader.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTagsHeader.AutoSize = true;
+            this.lblTagsHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTagsHeader.Location = new System.Drawing.Point(4, 7);
+            this.lblTagsHeader.Name = "lblTagsHeader";
+            this.lblTagsHeader.Size = new System.Drawing.Size(108, 17);
+            this.lblTagsHeader.TabIndex = 9;
+            this.lblTagsHeader.Text = "Text Goes Here";
+            // 
             // pnlPrevTags
             // 
             this.pnlPrevTags.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlPrevTags.Controls.Add(this.btnAnime);
-            this.pnlPrevTags.Location = new System.Drawing.Point(3, 3);
+            this.pnlPrevTags.Location = new System.Drawing.Point(7, 26);
             this.pnlPrevTags.Name = "pnlPrevTags";
-            this.pnlPrevTags.Size = new System.Drawing.Size(247, 250);
+            this.pnlPrevTags.Size = new System.Drawing.Size(256, 227);
             this.pnlPrevTags.TabIndex = 5;
             // 
             // btnAnime
             // 
             this.btnAnime.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnAnime.Location = new System.Drawing.Point(8, 193);
+            this.btnAnime.Location = new System.Drawing.Point(21, 153);
             this.btnAnime.Name = "btnAnime";
             this.btnAnime.Size = new System.Drawing.Size(74, 61);
             this.btnAnime.TabIndex = 0;
@@ -535,6 +550,7 @@
         private System.Windows.Forms.Button btnNextImage;
         private System.Windows.Forms.Button btnPrevImage;
         private System.Windows.Forms.StatusStrip statusBar;
+        private System.Windows.Forms.Label lblTagsHeader;
     }
 }
 

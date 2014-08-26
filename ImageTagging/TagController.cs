@@ -14,6 +14,11 @@ namespace ImageTagging
         private ImageWithTags nextImage;
         private List<string> filesInFolder;
         private TagUsageData tagUsageData;
+        /// <summary>
+        /// Whether a file has been loaded yet so we have a current/next/prev image. This is used
+        /// to prevent trying to save/move through images etc before we have loaded anything.
+        /// </summary>
+        private bool filesLoaded = false;
 
 
 
@@ -30,19 +35,25 @@ namespace ImageTagging
 
         public void openImage(string filePath)
         {
+            if (filesLoaded)
+                this.currentImage.saveChangesToNewFile();
             currentImage = new ImageWithTags(filePath);
             displayImageAndTags();
             this.filesInFolder = getFilesInFolder(Path.GetDirectoryName(filePath));
             setNextImage();
             setPreviousImage();
+            this.filesLoaded = true;
         }
 
 
         public void openFolder(string directory)
         {
+            if (filesLoaded)
+                this.currentImage.saveChangesToNewFile();
             this.filesInFolder = getFilesInFolder(directory);
             loadNextImage(true);
             displayImageAndTags();
+            this.filesLoaded = true;
         }
 
         public void removeExistingTagFromImage(string tagToRemove)
@@ -122,6 +133,7 @@ namespace ImageTagging
             //    //call a method like displayStatusError("message") which puts that message
             //    //into the status bar so th euser can see.
             //}
+            this.currentImage.saveChangesToNewFile();
             loadPreviousImage();
             displayImageAndTags();
         }

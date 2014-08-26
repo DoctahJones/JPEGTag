@@ -12,13 +12,21 @@ namespace ImageTagging
 {
     public class ImageWithTags
     {
-        //the current image.
+        /// <summary>
+        /// The current image.
+        /// </summary>
         private Image img;
-        //the list of tags for the current image.
+        /// <summary>
+        /// The list of tags for the current image.
+        /// </summary>
         private List<string> tags;
-        //the filepath of the image.
+        /// <summary>
+        /// The filepath of this image.
+        /// </summary>
         private string filePath;
-        //whether the file has been changed so we know when leaving the image if the changes need to be written to disk.
+        /// <summary>
+        /// Whether the file has been changed so we know when leaving the image if the changes need to be written to disk.
+        /// </summary>
         private int hasChanged = 0;
 
         public ImageWithTags(String img)
@@ -131,8 +139,6 @@ namespace ImageTagging
                         output.Save(outputFile);
                     }
                 }
-                //TODO replace next lien with just deleting once prog is mroe stable
-                //File.Move(this.filePath, Path.GetDirectoryName(outputPath) + @"\" + Path.GetFileNameWithoutExtension(outputPath) + "x.jpg");
                 File.Delete(this.filePath);
                 File.Move(outputPath, this.filePath);
                 //reset the value of changes that have occurred since last save.
