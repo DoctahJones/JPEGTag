@@ -83,11 +83,46 @@ namespace ImageTagging
             lblExistingTags.Text = s.ToString();
         }
 
+        /// <summary>
+        /// Used to populate the previously used tags panel when it is currently empty. If just adding a single new button use addToPrevTagsPanel().
+        /// </summary>
+        /// <param name="tags"></param>
         public void populatePrevTagsPanel(List<string> tags)
         {
-            this.pnlPrevTags.
+            foreach (string curTag in tags)
+            {
+                Button b = new Button();
+                b.Text = curTag;
+                b.Click += new EventHandler(prevTagClick);
+                this.pnlPrevTags.addButton(b);
+            }
+
+
         }
 
+        /// <summary>
+        /// Used to add a single new button to the list of previously used tags. To populate with a list use populatrPrevTagsPanel().
+        /// </summary>
+        /// <param name="tag"></param>
+        public void addToPrevTagsPanel(string tag)
+        {
+            Button b = new Button();
+            b.Text = tag;
+            b.Click += new EventHandler(prevTagClick);
+            this.pnlPrevTags.addButton(b);
+        }
+
+        /// <summary>
+        /// Method to add a tag to an image when one of the tags in the list of previously used ones is clicked.
+        /// </summary>
+        /// <param name="sender">The Button that sent the event when it was clicked.</param>
+        /// <param name="e"></param>
+        void prevTagClick(object sender, EventArgs e)
+        {
+            Button b = (Button)sender;
+            this.controller.addTagToImage(b.Text);
+            
+        }
 
         private void openImageToolStripButton_Click(object sender, EventArgs e)
         {
@@ -200,7 +235,6 @@ namespace ImageTagging
             finally
             {
                 this.Dispose();
-                //base.OnFormClosing(e);
             }
         }
     }

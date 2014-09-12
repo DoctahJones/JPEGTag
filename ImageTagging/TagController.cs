@@ -28,7 +28,13 @@ namespace ImageTagging
             this.view.setController(this);
             this.filesInFolder = new List<string>();
             this.tagUsageData = new TagUsageData();
+            this.initialise();
+        }
+
+        private void initialise()
+        {
             readTagDataFromFile();
+            //TODO read? which tagusagedata member we are using, most recent or most used and load that into the buttons on view.
         }
 
 
