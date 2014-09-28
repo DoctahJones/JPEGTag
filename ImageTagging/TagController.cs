@@ -34,7 +34,17 @@ namespace ImageTagging
         private void initialise()
         {
             readTagDataFromFile();
-            //TODO read? which tagusagedata member we are using, most recent or most used and load that into the buttons on view.
+
+            if (Properties.Settings.Default.tagDataSortMethod == "mostUsed")
+            {
+                this.view.populatePrevTagsPanel(this.tagUsageData.getMostUsed().Keys.Cast<string>().ToList());
+            }
+            else
+            {
+                this.view.populatePrevTagsPanel(this.tagUsageData.getMostRecent().Cast<string>().ToList());
+            }
+            //TODO read? last used file and try and open that if possible. else the directory it was in. else nothing.
+
         }
 
 
@@ -182,6 +192,11 @@ namespace ImageTagging
         {
             this.currentImage.saveChangesToNewFile();
             this.saveTagDataToFile();
+            //if we haven't loaded a file don't need to write it and we won't have a currentImage.
+            if (this.filesLoaded)
+                Properties.Settings.Default.lastFile = currentImage.getFilePath();
+            //TODO may need to save method to sort tagData.
+            Properties.Settings.Default.Save();
         }
 
 
