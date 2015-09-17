@@ -31,16 +31,17 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.mnuMain = new System.Windows.Forms.MenuStrip();
             this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.openFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuOpenFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFileOpenImage = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFileQuit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuEditUndo = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuEditRedo = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEditPaste = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuEditDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tagSortingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuMostUsed = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuMostRecent = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuClearPreviousTags = new System.Windows.Forms.ToolStripMenuItem();
             this.dlgOpenFile = new System.Windows.Forms.OpenFileDialog();
             this.txtTagEntry = new System.Windows.Forms.TextBox();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
@@ -58,15 +59,15 @@
             this.btnPrevImage = new System.Windows.Forms.Button();
             this.lblCurrentTagsText = new System.Windows.Forms.Label();
             this.lblExistingTags = new System.Windows.Forms.LinkLabel();
+            this.lblTagsHeader = new System.Windows.Forms.Label();
             this.btnAddTag = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.pnlPrevTags = new ImageTagging.ResizableButtonPanel();
             this.shapeContainer2 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.lineShape2 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.dlgOpenFolder = new System.Windows.Forms.FolderBrowserDialog();
             this.statusBar = new System.Windows.Forms.StatusStrip();
-            this.lblTagsHeader = new System.Windows.Forms.Label();
-            this.pnlPrevTags = new ImageTagging.ResizableButtonPanel();
-            this.btnAnime = new System.Windows.Forms.Button();
+            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.mnuMain.SuspendLayout();
             this.tlsMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitAll)).BeginInit();
@@ -78,7 +79,7 @@
             this.splitLeftContent.Panel2.SuspendLayout();
             this.splitLeftContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMain)).BeginInit();
-            this.pnlPrevTags.SuspendLayout();
+            this.statusBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // mnuMain
@@ -98,20 +99,20 @@
             // mnuFile
             // 
             this.mnuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openFolderToolStripMenuItem,
+            this.mnuOpenFolder,
             this.mnuFileOpenImage,
             this.mnuFileQuit});
             this.mnuFile.Name = "mnuFile";
             this.mnuFile.Size = new System.Drawing.Size(37, 20);
             this.mnuFile.Text = "&File";
             // 
-            // openFolderToolStripMenuItem
+            // mnuOpenFolder
             // 
-            this.openFolderToolStripMenuItem.Name = "openFolderToolStripMenuItem";
-            this.openFolderToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openFolderToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.openFolderToolStripMenuItem.Text = "&Open Folder";
-            this.openFolderToolStripMenuItem.Click += new System.EventHandler(this.openFolderToolStripMenuItem_Click);
+            this.mnuOpenFolder.Name = "mnuOpenFolder";
+            this.mnuOpenFolder.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.mnuOpenFolder.Size = new System.Drawing.Size(182, 22);
+            this.mnuOpenFolder.Text = "&Open Folder";
+            this.mnuOpenFolder.Click += new System.EventHandler(this.mnuOpenFolder_Click);
             // 
             // mnuFileOpenImage
             // 
@@ -132,53 +133,67 @@
             // mnuEdit
             // 
             this.mnuEdit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuEditUndo,
-            this.mnuEditRedo,
-            this.toolStripMenuItem1,
-            this.mnuEditPaste,
-            this.mnuEditDelete});
+            this.mnuCopy,
+            this.mnuEditPaste});
             this.mnuEdit.Name = "mnuEdit";
             this.mnuEdit.Size = new System.Drawing.Size(39, 20);
             this.mnuEdit.Text = "&Edit";
             // 
-            // mnuEditUndo
+            // mnuCopy
             // 
-            this.mnuEditUndo.Name = "mnuEditUndo";
-            this.mnuEditUndo.Size = new System.Drawing.Size(143, 22);
-            this.mnuEditUndo.Text = "Undo";
-            // 
-            // mnuEditRedo
-            // 
-            this.mnuEditRedo.Name = "mnuEditRedo";
-            this.mnuEditRedo.Size = new System.Drawing.Size(143, 22);
-            this.mnuEditRedo.Text = "Redo";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(140, 6);
+            this.mnuCopy.Image = ((System.Drawing.Image)(resources.GetObject("mnuCopy.Image")));
+            this.mnuCopy.Name = "mnuCopy";
+            this.mnuCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.mnuCopy.Size = new System.Drawing.Size(230, 22);
+            this.mnuCopy.Text = "Copy From Text Entry";
             // 
             // mnuEditPaste
             // 
             this.mnuEditPaste.Image = ((System.Drawing.Image)(resources.GetObject("mnuEditPaste.Image")));
             this.mnuEditPaste.Name = "mnuEditPaste";
             this.mnuEditPaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.mnuEditPaste.Size = new System.Drawing.Size(143, 22);
-            this.mnuEditPaste.Text = "Paste";
-            // 
-            // mnuEditDelete
-            // 
-            this.mnuEditDelete.Image = ((System.Drawing.Image)(resources.GetObject("mnuEditDelete.Image")));
-            this.mnuEditDelete.Name = "mnuEditDelete";
-            this.mnuEditDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.mnuEditDelete.Size = new System.Drawing.Size(143, 22);
-            this.mnuEditDelete.Text = "Delete";
+            this.mnuEditPaste.Size = new System.Drawing.Size(230, 22);
+            this.mnuEditPaste.Text = "Paste Into Text Entry";
+            this.mnuEditPaste.Click += new System.EventHandler(this.mnuEditPaste_Click);
             // 
             // viewToolStripMenuItem
             // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tagSortingToolStripMenuItem,
+            this.mnuClearPreviousTags});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "&View";
+            // 
+            // tagSortingToolStripMenuItem
+            // 
+            this.tagSortingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuMostUsed,
+            this.mnuMostRecent});
+            this.tagSortingToolStripMenuItem.Name = "tagSortingToolStripMenuItem";
+            this.tagSortingToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.tagSortingToolStripMenuItem.Text = "Tag Sorting";
+            // 
+            // mnuMostUsed
+            // 
+            this.mnuMostUsed.Name = "mnuMostUsed";
+            this.mnuMostUsed.Size = new System.Drawing.Size(140, 22);
+            this.mnuMostUsed.Text = "Most Used";
+            this.mnuMostUsed.Click += new System.EventHandler(this.mnuMostUsed_Click);
+            // 
+            // mnuMostRecent
+            // 
+            this.mnuMostRecent.Name = "mnuMostRecent";
+            this.mnuMostRecent.Size = new System.Drawing.Size(140, 22);
+            this.mnuMostRecent.Text = "Most Recent";
+            this.mnuMostRecent.Click += new System.EventHandler(this.mnuMostRecent_Click);
+            // 
+            // mnuClearPreviousTags
+            // 
+            this.mnuClearPreviousTags.Name = "mnuClearPreviousTags";
+            this.mnuClearPreviousTags.Size = new System.Drawing.Size(177, 22);
+            this.mnuClearPreviousTags.Text = "Clear Previous Tags";
+            this.mnuClearPreviousTags.Click += new System.EventHandler(this.mnuClearPreviousTags_Click);
             // 
             // dlgOpenFile
             // 
@@ -191,7 +206,7 @@
             this.txtTagEntry.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTagEntry.Location = new System.Drawing.Point(19, 287);
             this.txtTagEntry.Name = "txtTagEntry";
-            this.txtTagEntry.Size = new System.Drawing.Size(129, 26);
+            this.txtTagEntry.Size = new System.Drawing.Size(119, 26);
             this.txtTagEntry.TabIndex = 0;
             // 
             // shapeContainer1
@@ -257,6 +272,7 @@
             this.saveToolStripButton.Name = "saveToolStripButton";
             this.saveToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.saveToolStripButton.Text = "&Save";
+            this.saveToolStripButton.Click += new System.EventHandler(this.saveToolStripButton_Click);
             // 
             // toolStripSeparator
             // 
@@ -270,7 +286,8 @@
             this.pasteToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.pasteToolStripButton.Name = "pasteToolStripButton";
             this.pasteToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.pasteToolStripButton.Text = "&Paste";
+            this.pasteToolStripButton.Text = "&Paste Into Text Entry";
+            this.pasteToolStripButton.Click += new System.EventHandler(this.pasteToolStripButton_Click);
             // 
             // splitAll
             // 
@@ -320,12 +337,12 @@
             // splitLeftContent.Panel2
             // 
             this.splitLeftContent.Panel2.AutoScroll = true;
-            this.splitLeftContent.Panel2.AutoScrollMargin = new System.Drawing.Size(0, 5);
             this.splitLeftContent.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitLeftContent.Panel2.Controls.Add(this.btnNextImage);
             this.splitLeftContent.Panel2.Controls.Add(this.btnPrevImage);
             this.splitLeftContent.Panel2.Controls.Add(this.lblCurrentTagsText);
             this.splitLeftContent.Panel2.Controls.Add(this.lblExistingTags);
+            this.splitLeftContent.Panel2.Resize += new System.EventHandler(this.splitLeftContent_Panel2_Resize);
             this.splitLeftContent.Panel2MinSize = 65;
             this.splitLeftContent.Size = new System.Drawing.Size(355, 348);
             this.splitLeftContent.SplitterDistance = 204;
@@ -336,7 +353,7 @@
             // 
             this.picMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picMain.Image = global::ImageTagging.Properties.Resources.growlith;
+            this.picMain.Image = ((System.Drawing.Image)(resources.GetObject("picMain.Image")));
             this.picMain.Location = new System.Drawing.Point(0, 0);
             this.picMain.Name = "picMain";
             this.picMain.Size = new System.Drawing.Size(355, 204);
@@ -347,7 +364,7 @@
             // btnNextImage
             // 
             this.btnNextImage.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnNextImage.Location = new System.Drawing.Point(164, 14);
+            this.btnNextImage.Location = new System.Drawing.Point(124, 14);
             this.btnNextImage.Name = "btnNextImage";
             this.btnNextImage.Size = new System.Drawing.Size(111, 23);
             this.btnNextImage.TabIndex = 9;
@@ -359,7 +376,7 @@
             // btnPrevImage
             // 
             this.btnPrevImage.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnPrevImage.Location = new System.Drawing.Point(50, 14);
+            this.btnPrevImage.Location = new System.Drawing.Point(10, 14);
             this.btnPrevImage.Name = "btnPrevImage";
             this.btnPrevImage.Size = new System.Drawing.Size(111, 23);
             this.btnPrevImage.TabIndex = 8;
@@ -382,17 +399,33 @@
             // 
             this.lblExistingTags.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblExistingTags.AutoEllipsis = true;
+            this.lblExistingTags.AutoSize = true;
             this.lblExistingTags.Location = new System.Drawing.Point(32, 68);
+            this.lblExistingTags.MaximumSize = new System.Drawing.Size(300, 0);
             this.lblExistingTags.Name = "lblExistingTags";
-            this.lblExistingTags.Size = new System.Drawing.Size(263, 68);
+            this.lblExistingTags.Size = new System.Drawing.Size(0, 13);
             this.lblExistingTags.TabIndex = 6;
             this.lblExistingTags.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblExistingTags_LinkClicked);
+            // 
+            // lblTagsHeader
+            // 
+            this.lblTagsHeader.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTagsHeader.AutoSize = true;
+            this.lblTagsHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTagsHeader.Location = new System.Drawing.Point(4, 7);
+            this.lblTagsHeader.Name = "lblTagsHeader";
+            this.lblTagsHeader.Size = new System.Drawing.Size(108, 17);
+            this.lblTagsHeader.TabIndex = 9;
+            this.lblTagsHeader.Text = "Text Goes Here";
             // 
             // btnAddTag
             // 
             this.btnAddTag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddTag.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddTag.Location = new System.Drawing.Point(154, 287);
+            this.btnAddTag.Location = new System.Drawing.Point(144, 287);
             this.btnAddTag.Name = "btnAddTag";
             this.btnAddTag.Size = new System.Drawing.Size(73, 31);
             this.btnAddTag.TabIndex = 7;
@@ -410,6 +443,16 @@
             this.label1.Size = new System.Drawing.Size(54, 13);
             this.label1.TabIndex = 6;
             this.label1.Text = "New Tag:";
+            // 
+            // pnlPrevTags
+            // 
+            this.pnlPrevTags.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlPrevTags.Location = new System.Drawing.Point(7, 26);
+            this.pnlPrevTags.Name = "pnlPrevTags";
+            this.pnlPrevTags.Size = new System.Drawing.Size(246, 227);
+            this.pnlPrevTags.TabIndex = 5;
             // 
             // shapeContainer2
             // 
@@ -434,45 +477,18 @@
             // 
             // statusBar
             // 
+            this.statusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusLabel});
             this.statusBar.Location = new System.Drawing.Point(0, 403);
             this.statusBar.Name = "statusBar";
             this.statusBar.Size = new System.Drawing.Size(627, 22);
             this.statusBar.TabIndex = 10;
             // 
-            // lblTagsHeader
+            // statusLabel
             // 
-            this.lblTagsHeader.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblTagsHeader.AutoSize = true;
-            this.lblTagsHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTagsHeader.Location = new System.Drawing.Point(4, 7);
-            this.lblTagsHeader.Name = "lblTagsHeader";
-            this.lblTagsHeader.Size = new System.Drawing.Size(108, 17);
-            this.lblTagsHeader.TabIndex = 9;
-            this.lblTagsHeader.Text = "Text Goes Here";
-            // 
-            // pnlPrevTags
-            // 
-            this.pnlPrevTags.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlPrevTags.Controls.Add(this.btnAnime);
-            this.pnlPrevTags.Location = new System.Drawing.Point(7, 26);
-            this.pnlPrevTags.Name = "pnlPrevTags";
-            this.pnlPrevTags.Size = new System.Drawing.Size(256, 227);
-            this.pnlPrevTags.TabIndex = 5;
-            // 
-            // btnAnime
-            // 
-            this.btnAnime.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnAnime.Location = new System.Drawing.Point(21, 153);
-            this.btnAnime.Name = "btnAnime";
-            this.btnAnime.Size = new System.Drawing.Size(74, 61);
-            this.btnAnime.TabIndex = 0;
-            this.btnAnime.Text = "Make Anime Happen";
-            this.btnAnime.UseVisualStyleBackColor = true;
-            this.btnAnime.Click += new System.EventHandler(this.btnAnime_Click);
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(19, 17);
+            this.statusLabel.Text = "    ";
             // 
             // MainForm
             // 
@@ -505,7 +521,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitLeftContent)).EndInit();
             this.splitLeftContent.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picMain)).EndInit();
-            this.pnlPrevTags.ResumeLayout(false);
+            this.statusBar.ResumeLayout(false);
+            this.statusBar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -513,11 +530,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnAnime;
         private System.Windows.Forms.MenuStrip mnuMain;
         private System.Windows.Forms.ToolStripMenuItem mnuFile;
         private System.Windows.Forms.ToolStripMenuItem mnuFileOpenImage;
-        private System.Windows.Forms.ToolStripMenuItem openFolderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuOpenFolder;
         private System.Windows.Forms.ToolStripMenuItem mnuFileQuit;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.PictureBox picMain;
@@ -525,10 +541,6 @@
         private System.Windows.Forms.TextBox txtTagEntry;
         private System.Windows.Forms.ToolStripMenuItem mnuEdit;
         private System.Windows.Forms.ToolStripMenuItem mnuEditPaste;
-        private System.Windows.Forms.ToolStripMenuItem mnuEditDelete;
-        private System.Windows.Forms.ToolStripMenuItem mnuEditUndo;
-        private System.Windows.Forms.ToolStripMenuItem mnuEditRedo;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape1;
         private System.Windows.Forms.LinkLabel lblExistingTags;
@@ -551,6 +563,12 @@
         private System.Windows.Forms.Button btnPrevImage;
         private System.Windows.Forms.StatusStrip statusBar;
         private System.Windows.Forms.Label lblTagsHeader;
+        private System.Windows.Forms.ToolStripMenuItem tagSortingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuMostUsed;
+        private System.Windows.Forms.ToolStripMenuItem mnuMostRecent;
+        private System.Windows.Forms.ToolStripMenuItem mnuClearPreviousTags;
+        private System.Windows.Forms.ToolStripMenuItem mnuCopy;
+        private System.Windows.Forms.ToolStripStatusLabel statusLabel;
     }
 }
 

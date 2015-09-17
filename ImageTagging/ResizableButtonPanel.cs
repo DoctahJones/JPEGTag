@@ -6,6 +6,9 @@ using System.Windows.Forms;
 
 namespace ImageTagging
 {
+    /// <summary>
+    /// Class to represent a panel which has a variable number of buttons on it which adjust to the size of the panel and number of buttons located upon it.
+    /// </summary>
     public class ResizableButtonPanel : Panel
     {
 
@@ -19,6 +22,9 @@ namespace ImageTagging
         //the maximum number of rows of buttons that can fit within the panel.
         int maxRows = -1;
 
+        /// <summary>
+        /// Constructor for Panel.
+        /// </summary>
         public ResizableButtonPanel()
         {
             currentButtons = new List<Button>();
@@ -83,7 +89,22 @@ namespace ImageTagging
             }
         }
 
+        /// <summary>
+        /// Remove a button from the panel.
+        /// </summary>
+        /// <param name="b">The button to remove.</param>
+        public void RemoveButton(Button b)
+        {
+            this.currentButtons.Remove(b);
+            this.Controls.Remove(b);
+            b.Dispose();
+            setButtonsLocations();
+        }
 
+        /// <summary>
+        /// Method to add a button to the panel and readjust positions.
+        /// </summary>
+        /// <param name="b">The button to add.</param>
         public void addButton(Button b)
         {
             if (columns == -1)
@@ -100,6 +121,10 @@ namespace ImageTagging
             setButtonsLocations();
         }
 
+        /// <summary>
+        /// Get the width of the buttons.
+        /// </summary>
+        /// <returns>The width of the buttons.</returns>
         public int getButtonWidth()
         {
             if (currentButtons.Count > 0)
@@ -112,6 +137,10 @@ namespace ImageTagging
             }
         }
 
+        /// <summary>
+        /// Gets the height of the buttons.
+        /// </summary>
+        /// <returns>The height of the buttons.</returns>
         public int getButtonHeight()
         {
             if (currentButtons.Count > 0)
@@ -124,8 +153,20 @@ namespace ImageTagging
             }
         }
 
+        /// <summary>
+        /// Returns a list of the current buttons.
+        /// </summary>
+        /// <returns>A list of the current buttons on the panel.</returns>
+        public List<Button> getCurrentButtons()
+        {
+            return this.currentButtons;
+        }
 
 
+        /// <summary>
+        /// Overridden method to readjust poistions of buttons whenever the panel is resized so that buttons don't get hidden or leave huge blank spaces.
+        /// </summary>
+        /// <param name="eventargs">The event arguements for the resize.</param>
         protected override void OnResize(EventArgs eventargs)
         {
             //Recalculate coumns and rows of buttons on panel & reposition in case they have changed due to larger/smaller panel.

@@ -8,6 +8,9 @@ using System.IO;
 
 namespace ImageTagging
 {
+    /// <summary>
+    /// Class to store data about tags being used.
+    /// </summary>
     [DataContract]
     public class TagUsageData
     {
@@ -58,7 +61,7 @@ namespace ImageTagging
             {
                 this.mostUsed.Add(tag, 1);
             }
-            if (!(this.mostRecent.Count < 50))
+            if (this.mostRecent.Count >= 50)
             {
                 this.mostRecent.Dequeue();
             }
@@ -77,21 +80,47 @@ namespace ImageTagging
             return stream;
         }
 
+        /// <summary>
+        /// Writes the JSON output of this class to the filestream passed in.
+        /// </summary>
+        /// <param name="fileStream">The filestream to write to.</param>
         public void writeToFileStream(FileStream fileStream)
         {
             this.toJSON().WriteTo(fileStream);
         }
 
+        /// <summary>
+        /// Clears both mostUsed and mostRecent lists to empty lists.
+        /// </summary>
+        public void clearLists()
+        {
+            this.mostRecent.Clear();
+            this.mostUsed.Clear();
+            this.changesMade = true;
+        }
+
+        /// <summary>
+        /// Get the Hashtable of most used tags.
+        /// </summary>
+        /// <returns>The Hashtable.</returns>
         public Hashtable getMostUsed()
         {
             return this.mostUsed;
         }
 
+        /// <summary>
+        /// Get the most recent tags used Queue.
+        /// </summary>
+        /// <returns>The most recent tag Queue.</returns>
         public Queue getMostRecent()
         {
             return this.mostRecent;
         }
 
+        /// <summary>
+        /// Check if any changes have been made.
+        /// </summary>
+        /// <returns>Whether any changes have been made.</returns>
         public bool getChangesMade()
         {
             return this.changesMade;
